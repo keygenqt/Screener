@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id "org.jetbrains.kotlin.jvm" version "1.3.70"
+}
+
+group 'screener'
+
+sourceCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation files('/usr/share/java/slf4j-simple.jar')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+dependencies {
+    implementation 'com.dorkbox:SystemTray:3.17'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.744'
+    implementation 'com.google.cloud:google-cloud-vision:1.28.0'
+    implementation group: 'com.google.cloud', name: 'google-cloud-translate', version: '1.93.0'
+    implementation group: 'no.tornado', name: 'tornadofx', version: '1.7.20'
+    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '2.3.3'
+
+    implementation group: 'com.google.auth', name: 'google-auth-library-appengine', version: '0.20.0'
+    implementation group: 'com.google.cloud', name: 'google-cloud-storage', version: '1.106.0'
+}
+
+dependencies {
+    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
+    implementation group: 'com.j256.ormlite', name: 'ormlite-core', version: '5.1'
+    implementation group: 'com.j256.ormlite', name: 'ormlite-jdbc', version: '5.1'
+}
+
+dependencies {
+    implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.4.1'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.4.1'
+    implementation group: 'org.json', name: 'json', version: '20090211'
+    implementation group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'com.keygenqt.screener.AppMainKt'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+

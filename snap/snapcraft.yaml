@@ -1,0 +1,53 @@
+name: screener
+type: app
+base: core18
+version: '0.0.10'
+icon: gui/screener.png
+summary: Screenshot, etc.
+description: |
+  Linux app for easy screenshot
+
+grade: stable
+confinement: strict
+
+parts:
+  screener:
+
+    plugin: gradle
+    gradle-output-dir: build/libs
+    source: https://keygenqt_work@bitbucket.org/keygenqt_work/screener.git
+    source-type: git
+    source-tag: master
+    build-environment:
+      - JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+      - PATH: $JAVA_HOME/jre/bin:$PATH
+
+    build-packages:
+      - default-jdk
+      - default-jre
+      - libslf4j-java
+
+    stage-packages:
+      - default-jre
+      - libappindicator3-dev
+
+  desktop-file:
+    plugin: dump
+    source: gui
+    source-type: local
+    organize:
+      '*.desktop': desktop/
+    after: [screener]
+
+apps:
+  screener:
+    command: java -jar $SNAP/jar/screener.jar
+    desktop: desktop/screener.desktop
+    extensions:
+      - gnome-3-28
+    plugs:
+      - home
+      - network
+      - unity7
+      - desktop
+      - desktop-legacy

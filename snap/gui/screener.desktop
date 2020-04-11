@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=0.0.10
+Name=Screener
+GenericName=Screener
+Comment=Linux app for easy screenshot
+Keywords=screenshot;picture;desktop
+Exec=screener
+Icon=${SNAP}/meta/gui/icon.png
+Terminal=false
+Type=Application
+Categories=Utility;
