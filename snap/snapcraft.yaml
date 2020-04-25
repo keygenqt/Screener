@@ -2,7 +2,6 @@ name: screener
 type: app
 base: core18
 version: '1.0.0'
-icon: gui/screener.png
 summary: Linux app for easy screenshot
 description: |
   * Selection area
