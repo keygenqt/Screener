@@ -82,9 +82,9 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
         when (arg) {
             ARGS_SELECT -> {
                 if (data.contains("http")) {
-                    Info.showInfo("$URL_SAVE_IN_CLIPBOARD\n$data")
+                    Info.showInfo(URL_SAVE_IN_CLIPBOARD.replace("{data}", data))
                 } else {
-                    Info.showInfo("$IMAGE_SAVE_IN_CLIPBOARD\n$data")
+                    Info.showInfo(IMAGE_SAVE_IN_CLIPBOARD.replace("{data}", data))
                 }
                 Helper.copyToClipboard(data)
             }
@@ -93,11 +93,11 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
                 Helper.copyToClipboard("${URL_GOOGLE_SEARCH}${data}")
             }
             ARGS_VISION -> {
-                Info.showInfo("$STRING_CLOUD_VISION_SUCCESS\n\n$data")
+                Info.showInfo(STRING_CLOUD_VISION_SUCCESS.replace("{data}", data.trim()))
                 Helper.copyToClipboard(data)
             }
             ARGS_TRANSLATE -> {
-                Info.showInfo("$STRING_CLOUD_VISION_TRANSLATE_SUCCESS\n\n$data")
+                Info.showInfo(STRING_CLOUD_VISION_TRANSLATE_SUCCESS.replace("{data}", data.trim()))
                 Helper.copyToClipboard(data)
             }
         }

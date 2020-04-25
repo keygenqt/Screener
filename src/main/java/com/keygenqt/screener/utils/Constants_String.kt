@@ -16,8 +16,8 @@
 
 package com.keygenqt.screener.utils
 
-const val STRING_CLOUD_VISION_SUCCESS = "Text parse success:"
-const val STRING_CLOUD_VISION_TRANSLATE_SUCCESS = "Text translate success:"
+const val STRING_CLOUD_VISION_SUCCESS = "Text parse success:\n----\n{data}\n----"
+const val STRING_CLOUD_VISION_TRANSLATE_SUCCESS = "Text translate success:\n----\n{data}\n----"
 const val STRING_LINK_FOR_SEARCH_READY = "Link for search ready\nIt is placed on the clipboard"
-const val URL_SAVE_IN_CLIPBOARD = "Url save in clipboard:"
-const val IMAGE_SAVE_IN_CLIPBOARD = "Image save in clipboard:"
+const val URL_SAVE_IN_CLIPBOARD = "Url save in clipboard:\n----\n{data}\n----"
+const val IMAGE_SAVE_IN_CLIPBOARD = "Image save in clipboard:\n----\n{data}\n----"
