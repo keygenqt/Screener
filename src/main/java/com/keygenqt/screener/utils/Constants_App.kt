@@ -21,7 +21,7 @@ import kotlin.system.exitProcess
 
 const val APPLICATION_NAME = "Screener"
 const val INNER_APP_NAME = "screener"
-const val VERSION = "1.0.0"
+const val VERSION = "1.0.1"
 
 const val IMAGE_NAME = "screenshot"
 const val URL_GOOGLE_SEARCH = "https://www.google.com/searchbyimage?site=search&image_url="

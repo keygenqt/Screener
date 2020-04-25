@@ -1,7 +1,7 @@
 name: screener
 type: app
 base: core18
-version: '1.0.0'
+version: '1.0.1'
 summary: Linux app for easy screenshot
 description: |
   * Selection area
@@ -39,6 +39,9 @@ parts:
 apps:
   screener:
     command: java -jar $SNAP/jar/screener.jar
+    extensions:
+      - gnome-3-28
     plugs:
       - home
       - network
+      - unity7
