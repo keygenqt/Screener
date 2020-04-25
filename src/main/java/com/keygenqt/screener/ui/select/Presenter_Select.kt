@@ -16,12 +16,12 @@
 
 package com.keygenqt.screener.ui.select
 
+import com.keygenqt.screener.base.Configuration
 import com.keygenqt.screener.base.mvp.BasePresenterMvp
 import com.keygenqt.screener.components.others.Helper.Companion.getLastIndex
 import com.keygenqt.screener.components.uploads.UploadCloudTranslateImage
 import com.keygenqt.screener.components.uploads.UploadCloudVisionImage
 import com.keygenqt.screener.components.uploads.UploadImgurImage
-import com.keygenqt.screener.models.Settings
 import com.keygenqt.screener.utils.IMAGE_NAME
 import java.awt.Rectangle
 import java.awt.Robot
@@ -43,9 +43,9 @@ class SelectPresenter : BasePresenterMvp<SelectFrame>() {
     }
 
     fun saveImage(image: BufferedImage): String {
-        val dir = Settings.getSetting().dir
+        val dir = Configuration.getFolder()
         val index = getLastIndex(dir, IMAGE_NAME)
-        val path = "${Settings.getSetting().dir}/${IMAGE_NAME}-${index + 1}.png"
+        val path = "$dir/${IMAGE_NAME}-${index + 1}.png"
         ImageIO.write(image, "png", File(path))
         return path
     }

@@ -16,7 +16,7 @@
 
 package com.keygenqt.screener.components.drawing
 
-import com.keygenqt.screener.components.selector.COLOR_BG
+import com.keygenqt.screener.utils.COLOR_BG
 import java.awt.Graphics2D
 import java.awt.Point
 import java.awt.Rectangle

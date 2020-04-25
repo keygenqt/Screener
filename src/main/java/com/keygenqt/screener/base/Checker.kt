@@ -16,25 +16,54 @@
 
 package com.keygenqt.screener.base
 
+import com.google.common.io.Resources
+import com.keygenqt.screener.utils.PATH_APP_CONFIG
 import com.keygenqt.screener.utils.PATH_APP_TEMP_DIR
 import org.apache.commons.io.FileUtils
 import java.io.File
+import java.net.URL
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Paths
 
+@Suppress("JAVA_CLASS_ON_COMPANION")
 class Checker {
     companion object {
+        fun delay(value: String) {
+            value.toIntOrNull()?.let {
+                if (it > 300) {
+                    Info.error("Max value delay - 300 second")
+                }
+            } ?: run {
+                Info.error("Value delay must be a number")
+            }
+        }
 
         fun tempDir() {
-
             val tempDir = File(PATH_APP_TEMP_DIR)
-
             if (!tempDir.exists()) {
                 try {
                     FileUtils.forceMkdir(tempDir)
                 } catch (ex: Exception) {
-                    Info.errorTempDir()
+                    Info.error("I can't create temp dir $PATH_APP_TEMP_DIR")
                 }
             } else if (tempDir.isFile) {
-                Info.errorTempDir()
+                Info.error("Path is file: $PATH_APP_TEMP_DIR")
+            }
+            if (!File(PATH_APP_CONFIG).exists()) {
+                val url: URL = Resources.getResource("other/config.json")
+                val content: String = Resources.toString(url, StandardCharsets.UTF_8)
+                Files.write(Paths.get(PATH_APP_CONFIG), content.toByteArray())
+                Info.showInfo("Add default config to: $PATH_APP_CONFIG")
+            }
+
+            val screenshot = File(Configuration.getFolder())
+            if (!screenshot.exists()) {
+                try {
+                    FileUtils.forceMkdir(screenshot)
+                } catch (ex: Exception) {
+                    Info.error("I can't create screenshot dir $PATH_APP_TEMP_DIR")
+                }
             }
         }
     }

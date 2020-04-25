@@ -17,6 +17,7 @@
 package com.keygenqt.screener.components.selector
 
 import com.keygenqt.screener.components.drawing.*
+import com.keygenqt.screener.utils.COLOR_BG
 import java.awt.Graphics2D
 import java.awt.Rectangle
 import java.awt.image.BufferedImage
@@ -61,7 +62,7 @@ fun JLabel.repaintBg(
         }
     }
 
-    drawingZoom?.repaint(g)
+    drawingZoom?.repaint(g, imageBuffer.width, imageBuffer.height)
 
     repaint(Rectangle(0, 0, imageBuffer.width, imageBuffer.height))
     g.dispose()

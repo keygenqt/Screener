@@ -16,12 +16,12 @@
 
 package com.keygenqt.screener.utils
 
-const val SNAP_NAME = "SNAP_NAME" // SNAP_NAME=deployer
-const val SNAP_INSTANCE_NAME = "SNAP_INSTANCE_NAME" // SNAP_INSTANCE_NAME=deployer
-const val SNAP_COMMON = "SNAP_COMMON" // SNAP_COMMON=/var/snap/deployer/common
-const val SNAP_USER_COMMON = "SNAP_USER_COMMON" // SNAP_USER_COMMON=/home/keygenqt/snap/deployer/common
-const val SNAP_USER_DATA = "SNAP_USER_DATA" // SNAP_USER_DATA=/home/keygenqt/snap/deployer/x1
-const val SNAP_DATA = "SNAP_DATA" // SNAP_DATA=/var/snap/deployer/x1
-const val SNAP = "SNAP" // SNAP=/snap/deployer/x1
+const val SNAP_NAME = "SNAP_NAME"
+const val SNAP_INSTANCE_NAME = "SNAP_INSTANCE_NAME"
+const val SNAP_COMMON = "SNAP_COMMON"
+const val SNAP_USER_COMMON = "SNAP_USER_COMMON"
+const val SNAP_USER_DATA = "SNAP_USER_DATA"
+const val SNAP_DATA = "SNAP_DATA"
+const val SNAP = "SNAP"
 const val SNAP_COOKIE = "SNAP_COOKIE"
-const val HOME = "HOME" // HOME=/home/keygenqt/snap/deployer/x1
+const val HOME = "HOME"

@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package com.keygenqt.screener.ui.settings
+package com.keygenqt.screener.utils
 
-import com.keygenqt.screener.base.mvp.BaseViewMvp
+import java.awt.Color
 
-interface ViewSettings : BaseViewMvp {
+val COLOR_LINE = Color(212, 212, 212)
+val COLOR_BG = Color(0, 0, 0, 130)
+val COLOR_BORDER = Color(190, 22, 0)
 
-}
+
+

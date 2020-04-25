@@ -20,7 +20,7 @@ import com.google.api.gax.core.FixedCredentialsProvider
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.vision.v1.*
 import com.google.protobuf.ByteString
-import com.keygenqt.screener.models.Settings
+import com.keygenqt.screener.base.Configuration
 import java.io.File
 import java.io.FileInputStream
 import java.nio.file.Files
@@ -30,7 +30,7 @@ class UploadCloudVisionImage {
     companion object {
         fun getString(filePath: String): String {
 
-            val credStream = FileInputStream(File(Settings.getSetting().credentials))
+            val credStream = FileInputStream(File(Configuration.getCredentials()))
             val credentials = GoogleCredentials.fromStream(credStream)
             val imageAnnotatorSettings = ImageAnnotatorSettings.newBuilder()
                 .setCredentialsProvider(FixedCredentialsProvider.create(credentials))
@@ -58,9 +58,6 @@ class UploadCloudVisionImage {
                     }
                 }
             }
-
-            println("lksdfklsdklfj")
-
             return ""
         }
     }

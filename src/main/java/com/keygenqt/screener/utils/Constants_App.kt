@@ -16,26 +16,19 @@
 
 package com.keygenqt.screener.utils
 
-import com.keygenqt.screener.base.ConnectDb
 import com.keygenqt.screener.base.SnapDirs
 import kotlin.system.exitProcess
 
 const val APPLICATION_NAME = "Screener"
-const val VERSION = "0.0.10"
 const val INNER_APP_NAME = "screener"
+const val VERSION = "1.0.0"
 
 const val IMAGE_NAME = "screenshot"
 const val URL_GOOGLE_SEARCH = "https://www.google.com/searchbyimage?site=search&image_url="
 
 val PATH_APP_TEMP_DIR = SnapDirs.getEnv(SNAP_USER_COMMON)
-val PATH_APP_DB = "$PATH_APP_TEMP_DIR/.cache.db"
+val PATH_APP_CONFIG = "$PATH_APP_TEMP_DIR/config.json"
 
 fun exit() {
-    ConnectDb.close()
     exitProcess(0)
-}
-
-fun disableWarning() {
-    System.err.close()
-    System.setErr(System.out)
 }

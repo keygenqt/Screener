@@ -53,7 +53,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-            'Main-Class': 'com.keygenqt.screener.AppMainKt'
+            'Main-Class': 'com.keygenqt.screener.MainKt'
         )
     }
     from {

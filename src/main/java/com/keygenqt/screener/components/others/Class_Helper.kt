@@ -16,14 +16,12 @@
 
 package com.keygenqt.screener.components.others
 
+import com.keygenqt.screener.base.Configuration
 import com.keygenqt.screener.base.Info
 import com.keygenqt.screener.components.ImageSelection
 import com.keygenqt.screener.components.uploads.UploadImgurImage
-import com.keygenqt.screener.models.Settings
 import com.keygenqt.screener.utils.IMAGE_NAME
-import com.keygenqt.screener.utils.IMAGE_SAVE_IN_CLIPBOARD
 import com.keygenqt.screener.utils.URL_SAVE_IN_CLIPBOARD
-import com.keygenqt.screener.utils.exit
 import java.awt.Image
 import java.awt.Rectangle
 import java.awt.Robot
@@ -31,7 +29,6 @@ import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.awt.image.BufferedImage
 import java.io.File
-import java.util.*
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
@@ -51,9 +48,9 @@ class Helper {
 
         fun createDesktopScreenshot(): String {
             val image = Robot().createScreenCapture(Rectangle(Toolkit.getDefaultToolkit().screenSize))
-            val dir = Settings.getSetting().dir
+            val dir = Configuration.getFolder()
             val index = getLastIndex(dir, IMAGE_NAME)
-            val path = "${Settings.getSetting().dir}/$IMAGE_NAME-${index + 1}.png"
+            val path = "$dir/$IMAGE_NAME-${index + 1}.png"
             ImageIO.write(image, "png", File(path))
             return path
         }
@@ -72,26 +69,14 @@ class Helper {
 
         fun desktop() {
             val path = createDesktopScreenshot()
-            if (Settings.getSetting().imgur) {
+            if (Configuration.isImgur()) {
                 val url = UploadImgurImage.upload(path)
-                Info.notification("$URL_SAVE_IN_CLIPBOARD<br>$url") {
-//                    Desktop.getDesktop().browse(URI(url)) @todo snap!!!
-                }
+                Info.showInfo("$URL_SAVE_IN_CLIPBOARD\n$url")
                 copyToClipboard(url)
             } else {
-                Info.notification("$IMAGE_SAVE_IN_CLIPBOARD<br>$path") {
-//                    Desktop.getDesktop().open(File(path)) @todo snap!!!
-                }
+                Info.showInfo("$URL_SAVE_IN_CLIPBOARD\n$path")
                 copyToClipboardImage(path)
             }
-        }
-
-        fun restartApp() {
-            val command = ArrayList<String>()
-            command.add("/usr/bin/screener")
-            val builder = ProcessBuilder(command)
-            builder.start()
-            exit()
         }
     }
 }

@@ -16,8 +16,12 @@
 
 package com.keygenqt.screener.utils
 
-const val ARGS_DESKTOP = "--desktop"
 const val ARGS_SELECT = "--select"
+const val ARGS_SELECT_DELAY = "--select-delay"
+const val ARGS_DESKTOP = "--desktop"
+const val ARGS_SEARCH = "--search"
 const val ARGS_VISION = "--vision"
 const val ARGS_TRANSLATE = "--translate"
-const val ARGS_SEARCH = "--search"
+const val ARGS_DEBUG = "--debug"
+const val ARGS_VERSION = "--version"
+const val ARGS_HELP = "--help"

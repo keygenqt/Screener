@@ -16,12 +16,12 @@
 
 package com.keygenqt.screener.ui.select
 
+import com.keygenqt.screener.base.Configuration
 import com.keygenqt.screener.base.Info
 import com.keygenqt.screener.base.mvp.BaseFrameMvp
 import com.keygenqt.screener.base.mvp.InjectPresenter
 import com.keygenqt.screener.components.others.Helper
 import com.keygenqt.screener.components.selector.Selector
-import com.keygenqt.screener.models.Settings
 import com.keygenqt.screener.utils.*
 import java.awt.GraphicsEnvironment
 import java.awt.Image
@@ -33,33 +33,27 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
 
     @InjectPresenter
     lateinit var presenter: SelectPresenter
-    lateinit var trayClick: String
-    private var console: Boolean = false
+    lateinit var arg: String
 
     override fun getIcon(): Image {
         return Helper.getImage("/logo.png").image
     }
 
     override fun onCreate(bundle: HashMap<String, Any>) {
-
-        trayClick = bundle["menu"] as String
-        console = if (bundle.containsKey("console")) bundle["console"] as Boolean else false
-
+        arg = bundle["args"] as String
         presenter.loadImage()
-
         defaultCloseOperation = DO_NOTHING_ON_CLOSE
         val gfxEnv = GraphicsEnvironment.getLocalGraphicsEnvironment()
         val gfxDev = gfxEnv.defaultScreenDevice
         gfxDev.fullScreenWindow = this
-
     }
 
     override fun setImage(image: BufferedImage) {
         Selector.init(image, this) { img ->
             if (img != null) {
-                when (trayClick) {
-                    TRAY_SELECTION -> {
-                        if (Settings.getSetting().imgur) {
+                when (arg) {
+                    ARGS_SELECT -> {
+                        if (Configuration.isImgur()) {
                             presenter.uploadToImglur(presenter.saveImage(img))
                         } else {
                             val path = presenter.saveImage(img)
@@ -67,53 +61,46 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
                             Helper.copyToClipboardImage(path)
                         }
                     }
-                    TRAY_SEARCH_IN_GOOGLE -> {
+                    ARGS_SEARCH -> {
                         presenter.uploadToImglur(presenter.saveImage(img))
                     }
-                    TRAY_CLOUD_VISION -> {
+                    ARGS_VISION -> {
                         presenter.uploadToVision(presenter.saveImage(img))
                     }
-                    TRAY_CLOUD_TRANSLATE -> {
+                    ARGS_TRANSLATE -> {
                         presenter.uploadToTranslate(presenter.saveImage(img))
                     }
                 }
+            } else {
+                Timer().schedule(5000) { exit() }
             }
             this.isVisible = false
         }
     }
 
     override fun notificationInfo(data: String) {
-        when (trayClick) {
-            TRAY_SELECTION -> {
+        when (arg) {
+            ARGS_SELECT -> {
                 if (data.contains("http")) {
-                    Info.notification("$URL_SAVE_IN_CLIPBOARD<br>$data") {
-//                        Desktop.getDesktop().browse(URI(data)) @todo snap!!!
-                    }
+                    Info.showInfo("$URL_SAVE_IN_CLIPBOARD\n$data")
                 } else {
-                    Info.notification("$IMAGE_SAVE_IN_CLIPBOARD<br>$data") {
-//                        Desktop.getDesktop().open(File(data)) @todo snap!!!
-                    }
+                    Info.showInfo("$IMAGE_SAVE_IN_CLIPBOARD\n$data")
                 }
                 Helper.copyToClipboard(data)
             }
-            TRAY_SEARCH_IN_GOOGLE -> {
-                Info.notification(STRING_LINK_FOR_SEARCH_READY)
+            ARGS_SEARCH -> {
+                Info.showInfo(STRING_LINK_FOR_SEARCH_READY)
                 Helper.copyToClipboard("${URL_GOOGLE_SEARCH}${data}")
             }
-            TRAY_CLOUD_VISION -> {
-                Info.notification("$STRING_CLOUD_VISION_SUCCESS<br><br>$data")
+            ARGS_VISION -> {
+                Info.showInfo("$STRING_CLOUD_VISION_SUCCESS\n\n$data")
                 Helper.copyToClipboard(data)
             }
-            TRAY_CLOUD_TRANSLATE -> {
-                Info.notification("$STRING_CLOUD_VISION_TRANSLATE_SUCCESS<br><br>$data")
+            ARGS_TRANSLATE -> {
+                Info.showInfo("$STRING_CLOUD_VISION_TRANSLATE_SUCCESS\n\n$data")
                 Helper.copyToClipboard(data)
             }
         }
-
-        if (console) {
-            Timer().schedule(10000) {
-                exit()
-            }
-        }
+        Timer().schedule(5000) { exit() }
     }
 }

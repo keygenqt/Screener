@@ -16,31 +16,51 @@
 
 package com.keygenqt.screener.base
 
-import com.keygenqt.screener.base.mvp.BaseFrame
-import com.keygenqt.screener.ui.notification.NotificationFrame
-import com.keygenqt.screener.utils.ERROR_TEMP_DIR
+import com.keygenqt.screener.utils.VERSION
 import com.keygenqt.screener.utils.exit
 
 class Info {
     companion object {
 
+        fun showInfo(text: String) {
+            println()
+            println(text)
+        }
+
         fun error(text: String) {
+            println()
             println(text)
             exit()
         }
 
-        fun notification(text: String, l: () -> Unit = {}) {
-            BaseFrame.open(
-                NotificationFrame(), hashMapOf(
-                    "message" to text,
-                    "click" to l
-                )
+        fun showHelp() {
+            println(
+                """
+Usage: screener COMMAND=ARG...
+
+Linux app for easy screenshot
+
+Options
+    --select                Select area
+    --select-delay          Select area with delay
+    --desktop               Make screenshot desktop
+    --search                Search screenshot in Google search
+    --vision                Get text from screenshot
+    --translate             Translate text from screenshot
+
+    --debug                 Enable processes logging terminal
+    --version               Show the version and exit
+    --help                  Show help
+            """.trimIndent()
             )
+            exit()
         }
 
-        fun errorTempDir() {
-            println(ERROR_TEMP_DIR)
+        fun showVersion() {
+            println("Screener Ver $VERSION")
             exit()
         }
     }
 }
+
+// https://cloud.google.com/translate/docs/languages

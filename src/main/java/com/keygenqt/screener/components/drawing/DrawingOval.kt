@@ -16,7 +16,7 @@
 
 package com.keygenqt.screener.components.drawing
 
-import com.keygenqt.screener.components.selector.COLOR_BORDER
+import com.keygenqt.screener.utils.COLOR_BORDER
 import java.awt.BasicStroke
 import java.awt.Graphics2D
 import java.awt.Point

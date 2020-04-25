@@ -19,20 +19,18 @@ package com.keygenqt.screener.components.uploads
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.translate.Translate.TranslateOption
 import com.google.cloud.translate.TranslateOptions
-import com.keygenqt.screener.models.Settings
+import com.keygenqt.screener.base.Configuration
 import java.io.File
 import java.io.FileInputStream
 
 class UploadCloudTranslateImage {
     companion object {
         fun translate(text: String): String {
-            val credStream = FileInputStream(File(Settings.getSetting().credentials))
+            val credStream = FileInputStream(File(Configuration.getCredentials()))
             val credentials = GoogleCredentials.fromStream(credStream)
-            val translate = TranslateOptions.getDefaultInstance()
             val translation =
-                translate.toBuilder().setCredentials(credentials).build().service.translate(
-                    text,
-                    TranslateOption.targetLanguage(Settings.getSetting().languageTranslate)
+                TranslateOptions.newBuilder().setCredentials(credentials).build().service.translate(
+                    text, TranslateOption.targetLanguage(Configuration.getLanguage())
                 )
             return translation.translatedText
         }

@@ -16,8 +16,8 @@
 
 package com.keygenqt.screener.components.drawing
 
+import com.keygenqt.screener.utils.COLOR_LINE
 import java.awt.BasicStroke
-import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.Image
 import java.awt.event.MouseEvent
@@ -44,14 +44,14 @@ class DrawingZoom(
         y = e.y
     }
 
-    fun repaint(g: Graphics2D) {
+    fun repaint(g: Graphics2D, width: Int, height: Int) {
         val size = 160
         val sizeZoom = 80
         val xMin = x - sizeZoom / 2
         val yMin = y - sizeZoom / 2
 
-        if (xMin > 0) {
-            g.color = Color.white
+        if (xMin > 0 && yMin > 0 && width - x > 40 && height - y > 40) {
+            g.color = COLOR_LINE
             val imgCrop: BufferedImage = imageBuffer.getSubimage(xMin, yMin, sizeZoom, sizeZoom)
             g.stroke = BasicStroke(1f)
             g.clip = Ellipse2D.Float(x.toFloat(), y.toFloat(), size.toFloat(), size.toFloat())
