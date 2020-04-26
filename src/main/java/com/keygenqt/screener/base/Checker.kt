@@ -44,6 +44,7 @@ class Checker {
             val content: String = Resources.toString(cred.toURI().toURL(), StandardCharsets.UTF_8)
             try {
                 val json = JSONObject(content)
+//                println(json)
             } catch (ex: Exception) {
                 Info.error("Credentials file is not json.")
             }
