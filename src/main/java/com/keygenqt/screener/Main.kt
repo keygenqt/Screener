@@ -17,6 +17,7 @@
 package com.keygenqt.screener
 
 import com.keygenqt.screener.base.Checker
+import com.keygenqt.screener.base.Configuration
 import com.keygenqt.screener.base.Info
 import com.keygenqt.screener.base.mvp.BaseFrame
 import com.keygenqt.screener.components.others.Helper
@@ -45,8 +46,14 @@ fun main(args: Array<String>) {
         when (item) {
             ARGS_SELECT -> BaseFrame.open(SelectFrame(), hashMapOf("args" to ARGS_SELECT))
             ARGS_SEARCH -> BaseFrame.open(SelectFrame(), hashMapOf("args" to ARGS_SEARCH))
-            ARGS_VISION -> BaseFrame.open(SelectFrame(), hashMapOf("args" to ARGS_VISION))
-            ARGS_TRANSLATE -> BaseFrame.open(SelectFrame(), hashMapOf("args" to ARGS_TRANSLATE))
+            ARGS_VISION -> {
+                Checker.paramsCloud(Configuration.getCredentials())
+                BaseFrame.open(SelectFrame(), hashMapOf("args" to ARGS_VISION))
+            }
+            ARGS_TRANSLATE -> {
+                Checker.paramsCloud(Configuration.getCredentials())
+                BaseFrame.open(SelectFrame(), hashMapOf("args" to ARGS_TRANSLATE))
+            }
             ARGS_DEBUG -> PARAMS[ARGS_DEBUG] = "true"
             ARGS_VERSION -> Info.showVersion()
             ARGS_HELP -> Info.showHelp()

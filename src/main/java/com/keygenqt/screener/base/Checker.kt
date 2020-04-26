@@ -20,6 +20,7 @@ import com.google.common.io.Resources
 import com.keygenqt.screener.utils.PATH_APP_CONFIG
 import com.keygenqt.screener.utils.PATH_APP_TEMP_DIR
 import org.apache.commons.io.FileUtils
+import org.json.JSONObject
 import java.io.File
 import java.net.URL
 import java.nio.charset.StandardCharsets
@@ -29,6 +30,25 @@ import java.nio.file.Paths
 @Suppress("JAVA_CLASS_ON_COMPANION")
 class Checker {
     companion object {
+
+        fun paramsCloud(value: String) {
+            if (value.isEmpty()) {
+                Info.error("Your need add credentials cloud in config.json (~/snap/screener/common/config.json) \"Cloud credentials path to file\"")
+            }
+            val cred = File(value)
+            if (!cred.exists()) {
+                Info.error("File $value not found")
+            } else if (cred.isDirectory) {
+                Info.error("Credentials path is directory. Need json.")
+            }
+            val content: String = Resources.toString(cred.toURI().toURL(), StandardCharsets.UTF_8)
+            try {
+                val json = JSONObject(content)
+            } catch (ex: Exception) {
+                Info.error("Credentials file is not json.")
+            }
+        }
+
         fun delay(value: String) {
             value.toIntOrNull()?.let {
                 if (it > 300) {
