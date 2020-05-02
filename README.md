@@ -1,7 +1,7 @@
 Screener
 ===================
 
-![picture](https://bitbucket.org/keygenqt_work/screener/raw/1acb5d48c227908c8b24cfb8941cbb48754832fe/data/logo-small.png)
+![picture](data/logo-small.png)
 
 ## Release
 
@@ -40,4 +40,4 @@ Options
 
 ### Preview
 
-![picture](https://bitbucket.org/keygenqt_work/screener/raw/41c7d7a5c6b1451af01c6b933c2a3429d9579673/data/preview2.png)
+![picture](data/preview2.png)
