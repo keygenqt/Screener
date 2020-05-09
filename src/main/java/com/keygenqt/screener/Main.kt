@@ -28,7 +28,8 @@ import kotlin.concurrent.schedule
 
 val PARAMS = hashMapOf(
     ARGS_SELECT_DELAY to "5",
-    ARGS_DEBUG to "false"
+    ARGS_DEBUG to "false",
+    ARGS_CLOSE_TIME to "15000"
 )
 
 fun main(args: Array<String>) {
@@ -55,12 +56,9 @@ fun main(args: Array<String>) {
                 BaseFrame.open(SelectFrame(), hashMapOf("args" to ARGS_TRANSLATE))
             }
             ARGS_DEBUG -> PARAMS[ARGS_DEBUG] = "true"
+            ARGS_DESKTOP -> PARAMS[ARGS_DESKTOP] = "true"
             ARGS_VERSION -> Info.showVersion()
             ARGS_HELP -> Info.showHelp()
-            ARGS_DESKTOP -> {
-                Helper.desktop()
-                Timer().schedule(10000) { exit() }
-            }
             else -> {
                 when {
                     item.contains("^$ARGS_SELECT_DELAY\\=.+".toRegex()) -> {
@@ -79,8 +77,17 @@ fun main(args: Array<String>) {
                             }
                         }
                     }
+                    item.contains("^$ARGS_CLOSE_TIME\\=.+".toRegex()) -> {
+                        PARAMS[ARGS_CLOSE_TIME] = item.replace("$ARGS_CLOSE_TIME=", "")
+                        Checker.int("${PARAMS[ARGS_CLOSE_TIME]}")
+                    }
                 }
             }
         }
+    }
+
+    if (PARAMS[ARGS_DESKTOP] == "true") {
+        Helper.desktop()
+        Timer().schedule("${PARAMS[ARGS_CLOSE_TIME]}".toLong()) { exit() }
     }
 }

@@ -16,6 +16,7 @@
 
 package com.keygenqt.screener.ui.select
 
+import com.keygenqt.screener.PARAMS
 import com.keygenqt.screener.base.Configuration
 import com.keygenqt.screener.base.Info
 import com.keygenqt.screener.base.mvp.BaseFrameMvp
@@ -72,7 +73,7 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
                     }
                 }
             } else {
-                Timer().schedule(TIME_CLOSE) { exit() }
+                Timer().schedule("${PARAMS[ARGS_CLOSE_TIME]}".toLong()) { exit() }
             }
             this.isVisible = false
         }
@@ -101,6 +102,6 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
                 Helper.copyToClipboard(data)
             }
         }
-        Timer().schedule(TIME_CLOSE) { exit() }
+        Timer().schedule("${PARAMS[ARGS_CLOSE_TIME]}".toLong()) { exit() }
     }
 }

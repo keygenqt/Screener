@@ -60,6 +60,12 @@ class Checker {
             }
         }
 
+        fun int(value: String) {
+            if (value.toIntOrNull() == null) {
+                Info.error("Value must be a number")
+            }
+        }
+
         fun tempDir() {
             val tempDir = File(PATH_APP_TEMP_DIR)
             if (!tempDir.exists()) {

@@ -21,6 +21,7 @@ import com.keygenqt.screener.base.Info
 import com.keygenqt.screener.components.ImageSelection
 import com.keygenqt.screener.components.uploads.UploadImgurImage
 import com.keygenqt.screener.utils.IMAGE_NAME
+import com.keygenqt.screener.utils.IMAGE_SAVE_IN_CLIPBOARD
 import com.keygenqt.screener.utils.URL_SAVE_IN_CLIPBOARD
 import java.awt.Image
 import java.awt.Rectangle
@@ -71,10 +72,10 @@ class Helper {
             val path = createDesktopScreenshot()
             if (Configuration.isImgur()) {
                 val url = UploadImgurImage.upload(path)
-                Info.showInfo("$URL_SAVE_IN_CLIPBOARD\n$url")
+                Info.showInfo(URL_SAVE_IN_CLIPBOARD.replace("{data}", url))
                 copyToClipboard(url)
             } else {
-                Info.showInfo("$URL_SAVE_IN_CLIPBOARD\n$path")
+                Info.showInfo(IMAGE_SAVE_IN_CLIPBOARD.replace("{data}", path))
                 copyToClipboardImage(path)
             }
         }
