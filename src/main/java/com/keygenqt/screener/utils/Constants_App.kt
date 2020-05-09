@@ -28,6 +28,7 @@ const val URL_GOOGLE_SEARCH = "https://www.google.com/searchbyimage?site=search&
 
 val PATH_APP_TEMP_DIR = SnapDirs.getEnv(SNAP_USER_COMMON)
 val PATH_APP_CONFIG = "$PATH_APP_TEMP_DIR/config.json"
+const val TIME_CLOSE = 1000L
 
 fun exit() {
     exitProcess(0)

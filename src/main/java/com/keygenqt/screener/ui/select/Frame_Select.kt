@@ -72,7 +72,7 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
                     }
                 }
             } else {
-                Timer().schedule(5000) { exit() }
+                Timer().schedule(TIME_CLOSE) { exit() }
             }
             this.isVisible = false
         }
@@ -101,6 +101,6 @@ class SelectFrame : BaseFrameMvp(), ViewSelect {
                 Helper.copyToClipboard(data)
             }
         }
-        Timer().schedule(5000) { exit() }
+        Timer().schedule(TIME_CLOSE) { exit() }
     }
 }
